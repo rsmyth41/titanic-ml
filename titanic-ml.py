@@ -9,7 +9,6 @@ training = pd.read_csv('./train.csv')
 testing = pd.read_csv('./test.csv')
 
 training.head()
-
 training.isnull().sum()
 
 num_children = len(training.loc[training.Age < 18])
@@ -51,7 +50,12 @@ training.replace({"male": 1, "female": 0}, inplace=True)
 reduced_features = training[['Pclass', 'Sex', 'Age', 'SibSp']]
 targets = training['Survived']
 
-X_train, X_validation, y_train, y_validation = train_test_split(reduced_features, targets, train_size=0.7, test_size=0.3)
+X_train, X_validation, y_train, y_validation = train_test_split(
+    reduced_features,
+    targets,
+    train_size=0.7,
+    test_size=0.3
+)
 
 knn_model = KNeighborsClassifier(5)
 knn_model.fit(X_train, y_train)
